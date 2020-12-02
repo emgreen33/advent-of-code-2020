@@ -27,21 +27,22 @@
 # In this list, the two entries that sum to 2020 are 1721 and 299. Multiplying them together
 # produces 1721 * 299 = 514579, so the correct answer is 514579.
 
+# -- Part One ---
 
-
-lines = Array.new
-File.readlines('./inputs/day_1.txt', chomp: true).each { |line| lines << line.to_i }
+module DayOne
+  INPUT = File.readlines('./inputs/day_1.txt', chomp: true).each_with_object([]) { |line, memo| memo << line.to_i }
+end
 
 MATCHING = []
-def contains_pair_for_sum?(lines)
-  !!lines.uniq.combination(2).detect do |a, b|
+def contains_pair_for_sum?
+  !!DayOne::INPUT.uniq.combination(2).detect do |a, b|
     if a + b == 2020
       MATCHING << [a, b]
     end
   end
 end
 
-if contains_pair_for_sum?(lines)
+if contains_pair_for_sum?
   MATCHING.each do |pair|
     p "matching numbers are: #{pair[0]} and #{pair[1]}"
     p "correct answer is: #{pair[0] * pair[1]}"
