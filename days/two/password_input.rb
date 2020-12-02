@@ -16,17 +16,17 @@ class PasswordInput
     count.between?(min, max)
   end
 
-  def index_one
-    password[min - 1]
+  def index_one_match?
+    @index_one ||= password[min - 1] == matcher
   end
 
-  def index_two
-    password[max - 1]
+  def index_two_match?
+    @index_two ||= password[max - 1] == matcher
   end
 
   def valid_occurrences?
-    return true if index_one == matcher && index_two != matcher
-    return true if index_one != matcher && index_two == matcher
+    return true if index_one_match? && !index_two_match?
+    return true if !index_one_match? && index_two_match?
     false
   end
 end
