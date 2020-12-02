@@ -20,11 +20,10 @@
 # 2-9 c: ccccccccc is invalid: both position 2 and position 9 contain c.
 # How many passwords are valid according to the new interpretation of the policies?
 
-require_relative './part_1'
-include DayTwo
+require_relative 'password_input'
 
 def valid_occurrence_count
-  DayTwo::PASSWORDS.select { |data| data.valid_occurrences? }.size
+  PASSWORDS.select { |data| data.valid_occurrences? }.size
 end
 
 p "There are #{valid_occurrence_count} valid passwords"
