@@ -43,6 +43,20 @@ class PasswordInput
   def valid_count?
     count.between?(min, max)
   end
+
+  def index_one
+    password[min - 1]
+  end
+
+  def index_two
+    password[max - 1]
+  end
+
+  def valid_occurrences?
+    return true if index_one == matcher && index_two != matcher
+    return true if index_one != matcher && index_two == matcher
+    false
+  end
 end
 
 module DayTwo
@@ -51,7 +65,6 @@ module DayTwo
     memo << PasswordInput.new(info)
   end
 end
-
 
 def valid_password_count
   DayTwo::PASSWORDS.select { |password_info| password_info.valid_count? }.size
