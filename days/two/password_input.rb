@@ -8,12 +8,20 @@ class PasswordInput
     @password = info[3]
   end
 
-  def count
-    password.count(matcher)
-  end
-
   def valid_count?
     count.between?(min, max)
+  end
+
+  def valid_occurrences?
+    return true if index_one_match? && !index_two_match?
+    return true if !index_one_match? && index_two_match?
+    false
+  end
+
+  private
+
+  def count
+    password.count(matcher)
   end
 
   def index_one_match?
@@ -22,12 +30,6 @@ class PasswordInput
 
   def index_two_match?
     @index_two ||= password[max - 1] == matcher
-  end
-
-  def valid_occurrences?
-    return true if index_one_match? && !index_two_match?
-    return true if !index_one_match? && index_two_match?
-    false
   end
 end
 
