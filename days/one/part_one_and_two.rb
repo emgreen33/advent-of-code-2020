@@ -1,5 +1,4 @@
-INPUTS = File.readlines('./inputs/day_1.txt', chomp: true).each_with_object([]) { |line, memo| memo << line.to_i }
-
+INPUTS = File.readlines('./inputs/day_1.txt', chomp: true).map(&:to_i)
 
 class MatchingRecords
   attr_reader :inputs, :combo_count, :goal
@@ -26,8 +25,6 @@ class MatchingRecords
     numbers.reduce(:*)
   end
 end
-
-# --- Day 1: Report Repair ---
 
 # -- Part One ---
 # Find the two entries that sum to 2020 and then multiply those two numbers together.
