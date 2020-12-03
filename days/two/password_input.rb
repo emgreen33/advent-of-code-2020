@@ -13,9 +13,7 @@ class PasswordInput
   end
 
   def valid_occurrences?
-    return true if index_one_match? && !index_two_match?
-    return true if !index_one_match? && index_two_match?
-    false
+    (index_one_match? && !index_two_match?) ^ (!index_one_match? && index_two_match?)
   end
 
   private
@@ -25,11 +23,13 @@ class PasswordInput
   end
 
   def index_one_match?
-    @index_one ||= password[min - 1] == matcher
+    return @index_one_matches if defined? @index_one_matches
+    @index_one_matches = password[min - 1] == matcher
   end
 
   def index_two_match?
-    @index_two ||= password[max - 1] == matcher
+    return @index_two_match if defined? @index_two_match
+    @index_two_match = password[max - 1] == matcher
   end
 end
 
